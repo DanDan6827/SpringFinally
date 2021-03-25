@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>TESTAPP</title>
+<title>TESTAPP(수정완료)</title>
 </head>
 <body>
 <c:import url="/WEB-INF/views/common/header.jsp" />
