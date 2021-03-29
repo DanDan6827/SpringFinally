@@ -5,10 +5,24 @@
 	<!-- Appenders -->
 	<appender name="console" class="org.apache.log4j.ConsoleAppender">
 		<param name="Target" value="System.out" />
-		<layout class="org.apache.log4j.PatternLayout">
+		<!-- <layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%-5p: %c - %m%n" />
+		</layout> -->
+		<layout class = "org.apache.log4j.PatternLayout">
+			<param name = "ConversionPattern" value = "%-5p : [%c{1}] - %m%n" />
 		</layout>
 	</appender>
+	
+	<!-- layout 에 사용하는 로그 패턴 문자
+		%[자릿수]패턴 문자
+		자릿수: 출력할 정수 지정(정수:오른쪽 정렬,음수: 왼쪽정렬)
+		%p :priority(우선순위) , debug,info,error,fatal 등의 순위 출력
+		%m :로그 메세지(messages) 출력
+		%n : new line 줄바꿈,(enter)를 의미함
+		%c,%C : 카테고리(Category) 또는 클래스 명(full class name) 출력
+		   %c{2} 는 패키지명을 a.b.c일경우b.c만 출력을 의미함.
+		   %c{1}은 a.b.c 패키지명을 c만 출력하라는 의미.
+	-->
 	
 	<!-- Application Loggers -->
 	<logger name="com.ict.testapp">

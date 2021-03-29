@@ -29,7 +29,7 @@
 
 
 	<!-- 3.Mybatis 와 sqlSesstion 객체 생성 -->
-	<bean class="org.mybatis.spring.SqlSessionTemplate">
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSession" />
 	</bean>
 </beans>
