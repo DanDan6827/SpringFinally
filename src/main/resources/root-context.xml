@@ -9,7 +9,7 @@
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<!-- 1. DataBase 등록 -->
-	<bean id="dataSource"
+	<bean id="realDataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName"
 			value="oracle.jdbc.OracleDriver" />
@@ -18,6 +18,22 @@
 		<property name="username" value="c##ictedu03" />
 		<property name="password" value="1111" />
 	</bean>
+
+	<!-- log4jdbc-remix 관련 라이브러리 이용 realdataSource 처리 -->
+	<!-- log4j.xml에 등록한 logge 자동 연결 설정함 -->
+	<!-- sql query 문과 resultset결과값이 자동으로 콘솔에 출력됨 -->
+	<bean id="dataSource"
+		class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
+		<constructor-arg ref="realDataSource" />
+		<property name="logFormatter">
+			<bean
+				class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
+				<property name="loggingType" value="MULTI_LINE" />
+				<property name="sqlPrefix" value="[SQL]" />
+			</bean>
+		</property>
+	</bean>
+
 
 	<!-- 2.Spring과 Mybatis 연동 설정 -->
 	<bean id="sqlSession"
@@ -29,7 +45,8 @@
 
 
 	<!-- 3.Mybatis 와 sqlSesstion 객체 생성 -->
-	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+	<bean id="sqlSessionTemplate"
+		class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSession" />
 	</bean>
 </beans>
